@@ -10,7 +10,7 @@ const Collection = () => {
   const [filterProducts, setFilterProducts] = useState([]);
   const [category, setCategory] = useState([]);
   const [subCategory, setSubCategory] = useState([]);
-  const [sortType,setSortType] = useState('relevent')
+  const [sortType, setSortType] = useState("relevent");
 
   const toggleCategory = (e) => {
     if (category.includes(e.target.value)) {
@@ -154,9 +154,12 @@ const Collection = () => {
         <div className="flex justify-between text-base sm:text-2xl mb-4">
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
           {/* Products sort */}
-          <select className="border-2 border-gray-300 text-sm px-2" onChange={(e)=>{
-            setSortType(e.target.value)
-          }}>
+          <select
+            className="border-2 border-gray-300 text-sm px-2"
+            onChange={(e) => {
+              setSortType(e.target.value);
+            }}
+          >
             <option value="relevent">Sort by: Relevent</option>
             <option value="low-high">Sort by: Low to high</option>
             <option value="high-low">Sort by: High to low</option>
