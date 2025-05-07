@@ -82,6 +82,7 @@ const Product = () => {
               ))}
             </div>
           </div>
+          {/* Start from here*/}
         </div>
       </div>
     </div>
