@@ -5,7 +5,7 @@ import { ShopContext } from "../context/ShopContext.jsx";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-  const {setShowSearch,getCartCount} = useContext(ShopContext)
+  const { setShowSearch, getCartCount } = useContext(ShopContext);
 
   return (
     <div className="flex items-center justify-between py-5 font-medium">
@@ -35,7 +35,14 @@ const Navbar = () => {
       </ul>
 
       <div className="flex items-center gap-6">
-        <img onClick={()=>{setShowSearch(true)}} src={assets.search_icon} className="cursor-pointer w-5" alt="" />
+        <img
+          onClick={() => {
+            setShowSearch(true);
+          }}
+          src={assets.search_icon}
+          className="cursor-pointer w-5"
+          alt=""
+        />
         <div className="group relative ">
           <img
             src={assets.profile_icon}
