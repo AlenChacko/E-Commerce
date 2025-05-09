@@ -16,7 +16,6 @@ const CartTotal = () => {
           <p>
             {currency}
             {getCartAmount()}.00
-            {console.log(getCartAmount())}
           </p>
         </div>
         <hr />
