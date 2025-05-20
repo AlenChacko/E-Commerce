@@ -5,9 +5,11 @@ import helmet from "helmet";
 import morgan from "morgan";
 
 import testRoute from "./routes/testRoute.js";
+import connectDB from "./config/db.js";
 
 
 dotenv.config();
+connectDB()
 
 const app = express();
 
