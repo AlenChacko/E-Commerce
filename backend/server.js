@@ -4,21 +4,24 @@ import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
 
-import testRoute from "./routes/testRoute.js";
 import connectDB from "./config/db.js";
+import connectCloudinary from "./config/cloudinary.js";
+
+import userRouter from "./routes/userRoute.js";
 
 
 dotenv.config();
 connectDB()
+connectCloudinary()
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(helmet());
 app.use(morgan("dev"));
 app.use(express.json());
 
-app.use('/',testRoute)
+app.use('/api/user',userRouter)
 
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
