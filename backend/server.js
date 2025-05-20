@@ -8,6 +8,7 @@ import connectDB from "./config/db.js";
 import connectCloudinary from "./config/cloudinary.js";
 
 import userRouter from "./routes/userRoute.js";
+import productRouter from "./routes/productRouter.js";
 
 
 dotenv.config();
@@ -23,5 +24,6 @@ app.use(morgan("dev"));
 app.use(express.json());
 
 app.use('/api/user',userRouter)
+app.use('/api/product',productRouter)
 
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
