@@ -1,5 +1,6 @@
 import validator from "validator";
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
 
 import userModel from "../models/userModel.js";
 import { createToken } from "../utils/generateToken.js";
@@ -128,6 +129,49 @@ const loginUser = async (req, res) => {
   }
 };
 
-const adminLogin = async (req, res) => {};
+const adminLogin = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+      return res.status(400).json({
+        success: false,
+        message: "Email and password are required.",
+      });
+    }
+
+    // Check credentials
+    const isValid =
+      email === process.env.ADMIN_EMAIL &&
+      password === process.env.ADMIN_PASSWORD;
+
+    if (!isValid) {
+      return res.status(401).json({
+        success: false,
+        message: "Invalid credentials.",
+      });
+    }
+
+    // Create token from combined email + password string
+    const tokenPayload = email + password;
+    const token = jwt.sign(tokenPayload, process.env.JWT_SECRET);
+
+    return res.status(200).json({
+      success: true,
+      message: "Login successful.",
+      token,
+    });
+  } catch (error) {
+    console.error("Admin login error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Server error. Please try again later.",
+    });
+  }
+};
+
+
 
 export { loginUser, registerUser, adminLogin };
