@@ -138,10 +138,93 @@ const addProduct = async (req, res) => {
   }
 };
 
-const listProducts = async (req, res) => {};
+const listProducts = async (req, res) => {
+  try {
+    const products = await productModel.find({});
+    return res.status(200).json({
+      success: true,
+      data: products,
+    });
+  } catch (error) {
+    console.error("Failed to list products:", error);
 
-const removeProduct = async (req, res) => {};
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching the products.",
+      error: error.message,
+    });
+  }
+};
 
-const singleProduct = async (req, res) => {};
+const removeProduct = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "Product ID is required.",
+      });
+    }
+
+    const deletedProduct = await productModel.findByIdAndDelete(id);
+
+    if (!deletedProduct) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Product removed successfully.",
+    });
+  } catch (error) {
+    console.error("Failed to remove product:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while removing the product.",
+      error: error.message,
+    });
+  }
+};
+
+const singleProduct = async (req, res) => {
+  try {
+    const { id } = req.body;
+
+    if (!id) {
+      return res.status(400).json({
+        success: false,
+        message: "Product ID is required.",
+      });
+    }
+
+    const product = await productModel.findById(id);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        message: "Product not found.",
+      });
+    }
+
+    return res.status(200).json({
+      success: true,
+      data: product,
+    });
+  } catch (error) {
+    console.error("Failed to get product:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "An error occurred while retrieving the product.",
+      error: error.message,
+    });
+  }
+};
+
 
 export { addProduct, listProducts, removeProduct, singleProduct };
