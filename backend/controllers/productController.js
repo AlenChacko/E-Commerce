@@ -67,7 +67,6 @@ const addProduct = async (req, res) => {
       bestseller,
     } = req.body;
 
-    console.log("gsdfh",req.body)
     // Validate required fields
     if (
       !name ||
