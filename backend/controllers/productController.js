@@ -67,6 +67,7 @@ const addProduct = async (req, res) => {
       bestseller,
     } = req.body;
 
+    console.log("gsdfh",req.body)
     // Validate required fields
     if (
       !name ||
@@ -75,6 +76,7 @@ const addProduct = async (req, res) => {
       !category ||
       !subCategory ||
       !sizes
+      
     ) {
       return res.status(400).json({
         success: false,
