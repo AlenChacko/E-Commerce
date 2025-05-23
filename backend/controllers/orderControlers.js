@@ -23,7 +23,7 @@ const placeOrderCOD = async (req, res) => {
 
     res.json({ success: true, message: "Order Placed" });
   } catch (error) {
-    console.error("Update cart error:", error);
+    console.log("Update cart error:", error);
     res.json({ success: false, message: error.message });
   }
 };
@@ -38,25 +38,41 @@ const placeOrderRazorPay = async (req, res) => {};
 
 // Order data for admin
 
-const allOrders = async (req, res) => {};
+const allOrders = async (req, res) => {
+  try {
+    const orders = await orderModel.find({})
+    res.json({success:true,orders})
+  } catch (error) {
+     console.log("Error while getting orders:", error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 // Order data for user
 
 const userOrders = async (req, res) => {
   try {
     const { userId } = req.body;
-    console.log("orders",req.body)
     const orders = await orderModel.find({ userId });
     res.json({ success: true, orders });
   } catch (error) {
-    console.error("Error while getting orders:", error);
+    console.log("Error while getting orders:", error);
     res.json({ success: false, message: error.message });
   }
 };
 
 // update order status from admin side
 
-const updateStatus = async (req, res) => {};
+const updateStatus = async (req, res) => {
+  try {
+    const {orderId,status} = req.body
+    await orderModel.findByIdAndUpdate(orderId,{status})
+    res.json({ success: true, message:"Status Updated" });
+  } catch (error) {
+    console.log("Error while updating status:", error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 export {
   placeOrderCOD,

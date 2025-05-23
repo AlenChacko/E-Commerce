@@ -67,7 +67,7 @@ const registerUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Registration Error:", error);
+    console.log("Registration Error:", error);
     res.status(500).json({
       success: false,
       message: "Server error. Please try again later.",
@@ -121,7 +121,7 @@ const loginUser = async (req, res) => {
       },
     });
   } catch (error) {
-    console.error("Login Error:", error);
+    console.log("Login Error:", error);
     res.status(500).json({
       success: false,
       message: "Server error. Please try again later.",
@@ -132,7 +132,6 @@ const loginUser = async (req, res) => {
 const adminLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(req.body)
     if (!email || !password) {
       return res.status(400).json({
         success: false,
@@ -157,7 +156,7 @@ const adminLogin = async (req, res) => {
       token,
     });
   } catch (error) {
-    console.error("Admin Login Error:", error);
+    console.log("Admin Login Error:", error);
     res.status(500).json({
       success: false,
       message: "Server error. Please try again later.",

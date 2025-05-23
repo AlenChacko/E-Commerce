@@ -3,8 +3,6 @@ import jwt from "jsonwebtoken";
 const adminAuth = (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
-    console.log("auth header : ", authHeader);
-
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({
         success: false,
@@ -25,7 +23,7 @@ const adminAuth = (req, res, next) => {
 
     next();
   } catch (error) {
-    console.error("Admin auth error:", error);
+    console.log("Admin auth error:", error);
     return res.status(500).json({
       success: false,
       message: "Server error. Please try again later.",
