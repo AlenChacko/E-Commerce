@@ -6,7 +6,7 @@ import userModel from "../models/userModel.js";
 const placeOrderCOD = async (req, res) => {
   try {
     const { userId, items, amount, address } = req.body;
-    console.log("8888****8888 ,",req.body);
+    
     const orderData = {
       userId,
       items,
@@ -42,7 +42,17 @@ const allOrders = async (req, res) => {};
 
 // Order data for user
 
-const userOrders = async (req, res) => {};
+const userOrders = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    console.log("orders",req.body)
+    const orders = await orderModel.find({ userId });
+    res.json({ success: true, orders });
+  } catch (error) {
+    console.error("Error while getting orders:", error);
+    res.json({ success: false, message: error.message });
+  }
+};
 
 // update order status from admin side
 
