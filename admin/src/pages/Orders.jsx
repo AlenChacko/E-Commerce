@@ -20,7 +20,7 @@ const Orders = ({ token }) => {
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (response.data.success) {
-        setOrders(response.data.orders);
+        setOrders(response.data.orders.reverse());
       } else {
         toast.error(response.data.message);
       }
@@ -103,6 +103,14 @@ const Orders = ({ token }) => {
               <p className="mt-3">Method : {order.paymentMethod}</p>
               <p>Payment : {order.payment ? "Done" : "Pending"}</p>
               <p>Date : {new Date(order.date).toLocaleDateString()}</p>
+              <p>
+                Time :{" "}
+                {new Date(order.date).toLocaleTimeString([], {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                  hour12: true,
+                })}
+              </p>
             </div>
             <p className="text-sm sm:text-[15px]">
               {currency}
