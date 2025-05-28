@@ -2,3 +2,8 @@ Key should be in Capital,
 value should be in double quotes
 
 vite_backend_url = http://localhost:5000
+
+
+
+
+
